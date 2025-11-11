@@ -1,0 +1,49 @@
+name: Update Age in README
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # runs daily at midnight UTC
+  workflow_dispatch: # allows manual trigger
+
+jobs:
+  update-age:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Calculate age and update README
+        run: |
+          BIRTHDAY="2003-05-17"
+          TODAY=$(date +%Y-%m-%d)
+          
+          # Calculate age in years
+          AGE=$(( $(date -d "$TODAY" +%Y) - $(date -d "$BIRTHDAY" +%Y) ))
+          
+          # Adjust if birthday hasn’t happened yet this year
+          if [ $(date -d "$TODAY" +%m%d) -lt $(date -d "$BIRTHDAY" +%m%d) ]; then
+            AGE=$((AGE - 1))
+          fi
+
+          # Calculate days until next Halloween (Oct 31)
+          YEAR=$(date -d "$TODAY" +%Y)
+          HALLOWEEN="${YEAR}-10-31"
+          # if today's month/day is after Oct 31, use next year
+          if [ $(date -d "$TODAY" +%m%d) -gt 1031 ]; then
+            HALLOWEEN="$((YEAR + 1))-10-31"
+          fi
+          # difference in seconds divided by 86400 (floor)
+          DAYS_UNTIL_HALLOWEEN=$(( ( $(date -d "$HALLOWEEN" +%s) - $(date -d "$TODAY" +%s) ) / 86400 ))
+
+          # Replace placeholders in README
+          sed -i "s/<!--AGE-->/$AGE/" README.md
+          sed -i "s/<!--DAYS_UNTIL_HALLOWEEN-->/$DAYS_UNTIL_HALLOWEEN/" README.md
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Update README dynamic values [skip ci]" || echo "No changes to commit"
+          git push
