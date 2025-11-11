@@ -1,4 +1,4 @@
-name: Update Age in README
+name: Update Variables in README
 
 on:
   schedule:
@@ -50,3 +50,4 @@ jobs:
           git add README.md
           git commit -m "Update README dynamic values [skip ci]" || echo "No changes to commit"
           git push
+
