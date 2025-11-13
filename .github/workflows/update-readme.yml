@@ -2,7 +2,7 @@ name: Update Variables in README
 
 on:
   schedule:
-    - cron: '0 0 * * *' # runs daily at midnight UTC
+    - cron: '0 5 * * *' # runs daily at midnight EST/1am EDT
   workflow_dispatch: # allows manual trigger
 
 permissions:
