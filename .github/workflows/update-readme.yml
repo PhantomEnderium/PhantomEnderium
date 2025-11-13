@@ -39,9 +39,9 @@ jobs:
           # difference in seconds divided by 86400 (floor)
           DAYS_UNTIL_HALLOWEEN=$(( ( $(date -d "$HALLOWEEN" +%s) - $(date -d "$TODAY" +%s) ) / 86400 ))
 
-          # Replace placeholders in README
-          sed -i "s/<!--AGE-->/$AGE/" README.md
-          sed -i "s/<!--DAYS_UNTIL_HALLOWEEN-->/$DAYS_UNTIL_HALLOWEEN/" README.md
+          # Replace placeholders in README (using markers that persist)
+          sed -i "s/Age: [0-9]*/Age: $AGE/" README.md
+          sed -i "s/Days until next Halloween: [0-9]*/Days until next Halloween: $DAYS_UNTIL_HALLOWEEN/" README.md
 
       - name: Commit and push changes
         run: |
