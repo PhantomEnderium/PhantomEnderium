@@ -36,8 +36,8 @@ jobs:
           if [ $(date -d "$TODAY" +%m%d) -gt 1031 ]; then
             HALLOWEEN="$((YEAR + 1))-10-31"
           fi
-          # difference in seconds divided by 86400 (don't count today)
-          DAYS_UNTIL_HALLOWEEN=$(( ( $(date -d "$HALLOWEEN" +%s) - $(date -d "$TODAY" +%s) ) / 86400 ))
+          # difference in seconds divided by 86400 (ceiling - round up any partial day)
+          DAYS_UNTIL_HALLOWEEN=$(( ( $(date -d "$HALLOWEEN" +%s) - $(date -d "$TODAY" +%s) + 86399 ) / 86400 ))
 
           # Replace placeholders in README (using markers that persist)
           sed -i "s/Age: [0-9]*/Age: $AGE/" README.md
