@@ -3,5 +3,5 @@
 <!-- Dynamic values inserted by GitHub Actions -->
 Age: 22
 
-Days until next Halloween: 302
+Days until next Halloween: 301
 
