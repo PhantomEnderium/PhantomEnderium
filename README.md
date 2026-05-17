@@ -8,8 +8,8 @@ What do I plan on doing down the line? No idea. Figuring it all out as I go!
 
 ### Dynamic Counters!
 <!-- Dynamic values inserted by GitHub Actions -->
-Age: 22
+Age: 23
 
-Days until next Halloween: 168
+Days until next Halloween: 167
 
 
