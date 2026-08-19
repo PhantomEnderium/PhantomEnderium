@@ -10,6 +10,6 @@ What do I plan on doing down the line? No idea. Figuring it all out as I go!
 <!-- Dynamic values inserted by GitHub Actions -->
 Age: 23
 
-Days until next Halloween: 74
+Days until next Halloween: 73
 
 
